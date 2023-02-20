@@ -1,0 +1,29 @@
+# This workflow is a POC for demonstrating using Waypoint in an ephemeral
+# and remote environment, that is _easily_ executable via API call.
+
+name: Waypoint
+run-name: Waypoint
+
+on:
+  workflow_dispatch:
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Waypoint CLI
+        run: |
+          wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+          sudo apt update && sudo apt install waypoint
+      - name: Create Waypoint Context
+        run: |
+          waypoint context create \
+            -server-addr=${{ secrets.WAYPOINT_SERVER_ADDR }} \
+            -server-auth-token=${{ secrets.WAYPOINT_SERVER_TOKEN }} \
+            -server-require-auth=true \
+            -server-platform="hcp" \
+            -set-default \
+            hcp-waypoint-gh-runner
+      - name: Run Arbitrary Waypoint Command
+        run: |
+          waypoint runner list -json | jq
