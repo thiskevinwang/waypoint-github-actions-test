@@ -13,6 +13,14 @@ jobs:
       - name: Install Nixpacks
         run: |
           curl -sSL https://nixpacks.com/install.sh | sudo bash
+      - name: Install protoc
+        uses: arduino/setup-protoc@v1
+        with:
+          version: "3.x"
+      - name: Install proto-gen-go
+        run: |
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
       - name: Install Waypoint CLI
         run: |
           wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
