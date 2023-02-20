@@ -8,3 +8,13 @@ This repository is a proof-of-concept for...
 
 [wpn]: https://github.com/thiskevinwang/waypoint-plugin-nixpacks
 [waypoint]: https://developer.hashicorp.com/waypoint
+
+The [workflow file](./.github/workflows/workflow_dispatch.yml) relies on 4 repository [secrets][secrets] (Note: [variables][variables] can be used for the non-sensitive values):
+
+- `DOCKERHUB_TOKEN`
+- `DOCKERHUB_USERNAME` (not sensitive)
+- `WAYPOINT_SERVER_ADDR` (not sensitive)
+- `WAYPOINT_SERVER_TOKEN`
+
+[secrets]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
+[variables]: https://docs.github.com/en/actions/learn-github-actions/variables
