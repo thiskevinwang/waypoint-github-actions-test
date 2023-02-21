@@ -1,3 +1,6 @@
+![CleanShot 2023-02-20 at 21 07 05@2x](https://user-images.githubusercontent.com/26389321/220229432-09dfa2d7-88cb-4bfc-9ed2-29a24fa2c706.png)
+
+
 This repository is a proof-of-concept for...
 
 1. Using [`waypoint`][waypoint] in GitHub actions
